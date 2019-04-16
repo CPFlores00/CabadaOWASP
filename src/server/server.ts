@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Application } from 'express';
-import * as fs from 'fs';
-import * as https from 'https';
+//import * as fs from 'fs';
+// import * as https from 'https';
 import * as nodemailer from 'nodemailer';
 import * as bodyParser from 'body-parser';
 
@@ -30,13 +30,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-const commandLineArgs = require('command-line-args');
+/*const commandLineArgs = require('command-line-args');
 
 const optionDefinitions = [
   { name: 'secure', type: Boolean, defaultOption: true },
 ];
 
-const options = commandLineArgs(optionDefinitions);
+const options = commandLineArgs(optionDefinitions);*/
 
 const httpsServer = app.listen(9000, () => {
   console.log("HTTP Server Running");

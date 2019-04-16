@@ -1,45 +1,34 @@
 <!-- Default form register -->
-<form class="text-center border border-light p-5">
+<form [formGroup]="registerForm" (ngSubmit)="signUp()" class="text-center border border-light p-5">
 
   <p class="h4 mb-4">Sign up</p>
 
   <div class="form-row mb-4">
     <div class="col">
-      <!-- First name 
-      <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">-->
       <!-- First name -->
       <div class="md-form">
-        <input type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput>
+        <input formControlName="firstName" type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput>
         <label for="materialRegisterFormFirstName">First name</label>
       </div>
     </div>
     <div class="col">
-      <!-- Last name 
-      <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">-->
       <!-- Last name -->
       <div class="md-form">
-        <input type="text" id="materialRegisterFormLastName" class="form-control" mdbInput>
+        <input formControlName="lastName" type="text" id="materialRegisterFormLastName" class="form-control" mdbInput>
         <label for="materialRegisterFormLastName">Last name</label>
       </div>
     </div>
   </div>
 
-  <!-- E-mail 
-  <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">-->
   <!-- E-mail -->
   <div class="md-form mt-0">
-    <input type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
+    <input formControlName="email" type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
     <label for="materialRegisterFormEmail">E-mail</label>
   </div>
 
-  <!-- Password 
-  <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-  <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-    At least 8 characters and 1 digit
-  </small>-->
   <!-- Password -->
   <div class="md-form">
-    <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+    <input formControlName="password" type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
       mdbInput>
     <label for="materialRegisterFormPassword">Password</label>
     <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
@@ -49,19 +38,14 @@
 
   <!-- Confirm Password -->
   <div class="md-form">
-    <input type="password" id="materialRegisterFormConfirmPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+    <input formControlName="confirmPassword" type="password" id="materialRegisterFormConfirmPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
       mdbInput>
     <label for="materialRegisterFormConfirmPassword">Confirm Password</label>
   </div>
 
-  <!-- Phone number 
-  <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
-  <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-    Optional - for two step authentication
-  </small>-->
   <!-- Phone number -->
   <div class="md-form">
-    <input type="text" id="materialRegisterFormPhone" class="form-control" aria-describedby="materialRegisterFormPhoneHelpBlock"
+    <input formControlName="phoneNumber" type="text" id="materialRegisterFormPhone" class="form-control" aria-describedby="materialRegisterFormPhoneHelpBlock"
       mdbInput>
     <label for="materialRegisterFormPhone">Phone number</label>
     <small id="materialRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
@@ -72,7 +56,7 @@
   <!-- Newsletter -->
   <div class="row">
     <div class="col-md-6 mx-auto d-flex justify-content-center">
-      <mdb-checkbox [default]="true">Subscribe to our newsletter</mdb-checkbox>
+      <mdb-checkbox formControlName="newsletter" [default]="true">Subscribe to our newsletter</mdb-checkbox>
     </div>
   </div>
 
