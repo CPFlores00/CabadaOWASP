@@ -7,23 +7,29 @@
     <div class="col">
       <!-- First name -->
       <div class="md-form">
-        <input formControlName="firstName" autocomplete="off" type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput>
-        <label for="materialRegisterFormFirstName">First name</label>
+        <input formControlName="firstName" autocomplete="off" type="text" class="form-control" required mdbInput mdbValidate>
+        <label for="firstName">First name</label>
+        <mdb-error *ngIf="registerForm.controls.firstName.invalid && (registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched)">Input valid</mdb-success>
       </div>
     </div>
     <div class="col">
       <!-- Last name -->
       <div class="md-form">
-        <input formControlName="lastName" autocomplete="off" type="text" id="materialRegisterFormLastName" class="form-control" mdbInput>
-        <label for="materialRegisterFormLastName">Last name</label>
+        <input formControlName="lastName" autocomplete="off" type="text" class="form-control" required mdbInput mdbValidate>
+        <label for="lastName">Last name</label>
+        <mdb-error *ngIf="registerForm.controls.lastName.invalid && (registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="registerForm.controls.lastName.valid && (registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched)">Input valid</mdb-success>
       </div>
     </div>
   </div>
 
   <!-- E-mail -->
   <div class="md-form mt-0">
-    <input formControlName="email" type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
-    <label for="materialRegisterFormEmail">E-mail</label>
+    <input formControlName="email" type="email" class="form-control" required mdbInput mdbValidate>
+    <label for="email">E-mail</label>
+    <mdb-error *ngIf="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Input invalid</mdb-error>
+    <mdb-success *ngIf="registerForm.controls.email.valid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Input valid</mdb-success>
   </div>
 
   <!-- Password -->
@@ -44,19 +50,33 @@
   </div>
 
   <!-- Phone number -->
-  <div class="md-form">
-    <input formControlName="phoneNumber" autocomplete="off" type="text" id="materialRegisterFormPhone" class="form-control" aria-describedby="materialRegisterFormPhoneHelpBlock"
-      mdbInput>
-    <label for="materialRegisterFormPhone">Phone number</label>
-    <small id="materialRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-      Optional - for two step authentication
-    </small>
+  <div class="form-row mb-4">
+    <div class="col col-lg-2">
+      <div class="md-form">
+        <input formControlName="phoneNumberLada" autocomplete="off"
+          type="text" class="form-control"
+          mdbInput>
+        <label for="phoneNumberLada">Lada</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="md-form">
+        <input formControlName="phoneNumberCel" autocomplete="off"
+          type="text" class="form-control"
+          aria-describedby="mRegisterFormPhoneHelpBlock"
+          mdbInput>
+        <label for="phoneNumberCel">Phone number</label>
+        <small id="mRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+          Optional - for two step authentication
+        </small>
+      </div>
+    </div>
   </div>
 
   <!-- Newsletter -->
   <div class="row">
     <div class="col-md-6 mx-auto d-flex justify-content-center">
-      <mdb-checkbox formControlName="newsletter" [default]="true">Subscribe to our newsletter</mdb-checkbox>
+      <mdb-checkbox formControlName="isSuscribedToNewsletter">Subscribe to our newsletter</mdb-checkbox>
     </div>
   </div>
 

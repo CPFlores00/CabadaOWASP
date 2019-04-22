@@ -12,15 +12,6 @@
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link waves-light" [routerLink]="['home']" mdbWavesEffect>Home</a>
       </li>
-      <li *ngIf="isLoggedOut$ | async" class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link waves-light" [routerLink]="['login']" mdbWavesEffect>Login</a>
-      </li>
-      <li *ngIf="isLoggedOut$ | async" class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link waves-light" [routerLink]="['register']" mdbWavesEffect>Register</a>
-      </li>
-      <li *ngIf="isLoggedIn$ | async" class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link waves-light" [routerLink]="['logout']" mdbWavesEffect>Logout</a>
-      </li>
 
       <!-- Dropdown -->
       <li *ngIf="isLoggedIn$ | async" class="nav-item dropdown" dropdown>
@@ -39,9 +30,6 @@
     <!-- Links -->
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
-        <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
-      </li>
       <li *ngIf="isLoggedOut$ | async" class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link waves-light" [routerLink]="['login']" mdbWavesEffect>Login</a>
       </li>

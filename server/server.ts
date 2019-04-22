@@ -3,8 +3,8 @@ import { Application, Router, Request, Response, NextFunction } from 'express';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as https from 'https';
-import * as csrf  from 'csurf';
+// import * as https from 'https';
+// import * as csrf  from 'csurf';
 import * as nodemailer from 'nodemailer';
 // import * as bodyParser from 'body-parser';
 // import * as cookieParser from 'cookie-parser';
@@ -32,6 +32,7 @@ class Server {
     this.app.disable('strict routing');
     // Middlewares
     this.setup_database();
+    this.setup_cors();
     this.app.use(express.json());
     this.app.use(express.urlencoded({
       extended: true
@@ -46,8 +47,8 @@ class Server {
   private setup_database() {
     const MONGODB_URI: string = `mongodb://${ process.env.MONGODB_USER }:${ process.env.MONGODB_PASSWORD }@ds139956.mlab.com:39956/cabada-project`;
     const MONGODB_OPTIONS: any = {
-      useNewUrlParser: true,
-      autoIndex: true // to false in production mode
+      useCreateIndex: true, // to false in production mode
+      useNewUrlParser: true
     };
     mongoose.connect(MONGODB_URI, MONGODB_OPTIONS);
   }
@@ -82,6 +83,10 @@ class Server {
   private setup_cors() {
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // -- res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+      res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+      res.header('Access-Control-Allow-Credentials', 'true');
       res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
       next();
     });
@@ -117,34 +122,7 @@ class Server {
       console.log('%s %s %s', req.method, req.url, req.path);
       next();
     });
-    /*
-    router.route('/api/user')
-      .get((req: Request, res: Response, next: NextFunction) => {
-        res.status(201).json({title: 'c'});
-        next();
-      })
-      .put((req: Request, res: Response, next: NextFunction) => {
-        next();
-      });
-    router.route('/api/user/:id')
-      .get((req: Request, res: Response, next: NextFunction) => {
-        const { id } = req.params;
-        res.status(201).json({
-          id: id,
-          fname: 'Carlos',
-          lname: 'Flores',
-          email: 'crfloresc98@gmail.com',
-          cellphone: '+52 (644) 244 4668',
-          is_sub: true
-        });
-        next();
-      })
-      .delete((req: Request, res: Response, next: NextFunction) => {
-        next();
-      })
-      .post((req: Request, res: Response, next: NextFunction) => {
-        next();
-      });*/
+
     this.app.use(router);
   }
 

@@ -6,7 +6,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
 import { User } from '../model/user';
 
 export const ANONYMOUS_USER: User = {
-  id: undefined,
+  _id: undefined,
   email: ''
 }
 
@@ -19,16 +19,25 @@ export class AuthService {
   private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
   user$: Observable<User> = this.subject.asObservable();
   isLoggedIn$: Observable<boolean> = this.user$.pipe(
-    map(user => !!user.id));
+    map(user => !!user._id));
   isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(
     map(isLoggedIn => !isLoggedIn));
 
   constructor(private http: HttpClient) { }
 
-  signUp(email: string, password: string) {
-    return this.http.post<User>('/api/signup', {email, password}).pipe(
-      shareReplay(),
-      tap(user => this.subject.next(user)));
+  signUp(firstName: string, lastName: string, email: string, password: string, phoneNumber: string, isSuscribedToNewsletter: boolean) {
+    return this.http.post<User>('http://localhost:3000/api/user', {
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+      isSuscribedToNewsletter
+    })
+      .pipe(
+        shareReplay(),
+        tap(user => this.subject.next(user))
+      );
   }
 
 }

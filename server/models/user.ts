@@ -10,13 +10,13 @@ const UserSchema = new Schema({
   lastName: {
     type: String,
     minlength: 1,
-    maxlength: 25,
+    maxlength: 35,
     required: true
   },
   email: {
     type: String,
     minlength: 5,
-    maxlength: 50,
+    maxlength: 70,
     required: true,
     unique: true,
     lowercase: true
@@ -26,13 +26,17 @@ const UserSchema = new Schema({
     minlength: 8,
     required: true
   },
-  cellphone: {
+  phoneNumber: {
     type: String,
     minlength: 10,
     maxlength: 15
-  }/*,
-  isSuscribedToNewspaper: {
+  },
+  isSuscribedToNewsletter: {
     type: Boolean
+  },
+  isActive: {
+    type: Boolean,
+    default: false
   },
   meta: {
     logins: {
@@ -47,7 +51,7 @@ const UserSchema = new Schema({
       type: Number,
       default: 0
     }
-  }*/
+  }
 }, {
   timestamps: {
     createdAt: 'created_at'

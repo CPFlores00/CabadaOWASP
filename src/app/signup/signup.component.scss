@@ -10,3 +10,19 @@ form {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+@-webkit-keyframes autofill {
+  to {
+    color: #666;
+    background: transparent;} }
+
+  @keyframes autofill {
+  to {
+  color: #666;
+  background: transparent; } }
+
+  input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
