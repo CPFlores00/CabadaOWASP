@@ -1,111 +1,75 @@
-<!-- Default form register -->
-<form [formGroup]="registerForm" (ngSubmit)="signUp()" class="text-center border border-light p-5">
+<div class="bk-form">
+  <div class="container-fluid mt-5">
+    <!-- Default form register -->
+    <form [formGroup]="registerForm" (ngSubmit)="signUp()" class="text-center border border-light p-5">
 
-  <p class="h4 mb-4">Sign up</p>
+      <p class="h4 mb-4">Complete sus datos</p>
 
-  <div class="form-row mb-4">
-    <div class="col">
-      <!-- First name -->
-      <div class="md-form">
-        <input formControlName="firstName" autocomplete="off" type="text" class="form-control" required mdbInput mdbValidate>
-        <label for="firstName">First name</label>
-        <mdb-error *ngIf="registerForm.controls.firstName.invalid && (registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched)">Input invalid</mdb-error>
-        <mdb-success *ngIf="registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched)">Input valid</mdb-success>
+      <div class="form-row mb-4">
+        <div class="col">
+          <!-- First name -->
+          <div class="md-form">
+            <input formControlName="firstName" autocomplete="off" type="text" class="form-control" required mdbInput mdbValidate>
+            <label for="firstName">Nombre</label>
+            <mdb-error *ngIf="registerForm.controls.firstName.invalid && (registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched)">Input invalid</mdb-error>
+            <mdb-success *ngIf="registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched)">Input valid</mdb-success>
+          </div>
+        </div>
+        <div class="col">
+          <!-- Last name -->
+          <div class="md-form">
+            <input formControlName="lastName" autocomplete="off" type="text" class="form-control" required mdbInput mdbValidate>
+            <label for="lastName">Apellido</label>
+            <mdb-error *ngIf="registerForm.controls.lastName.invalid && (registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched)">Input invalid</mdb-error>
+            <mdb-success *ngIf="registerForm.controls.lastName.valid && (registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched)">Input valid</mdb-success>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <!-- Last name -->
-      <div class="md-form">
-        <input formControlName="lastName" autocomplete="off" type="text" class="form-control" required mdbInput mdbValidate>
-        <label for="lastName">Last name</label>
-        <mdb-error *ngIf="registerForm.controls.lastName.invalid && (registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched)">Input invalid</mdb-error>
-        <mdb-success *ngIf="registerForm.controls.lastName.valid && (registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched)">Input valid</mdb-success>
+
+      <!-- E-mail -->
+      <div class="md-form mt-0">
+        <input formControlName="email" type="email" class="form-control" required mdbInput mdbValidate>
+        <label for="email">Corre electronico</label>
+        <mdb-error *ngIf="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Input invalid</mdb-error>
+        <mdb-success *ngIf="registerForm.controls.email.valid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Input valid</mdb-success>
       </div>
-    </div>
-  </div>
 
-  <!-- E-mail -->
-  <div class="md-form mt-0">
-    <input formControlName="email" type="email" class="form-control" required mdbInput mdbValidate>
-    <label for="email">E-mail</label>
-    <mdb-error *ngIf="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Input invalid</mdb-error>
-    <mdb-success *ngIf="registerForm.controls.email.valid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">Input valid</mdb-success>
-  </div>
-
-  <!-- Password -->
-  <div class="md-form">
-    <input formControlName="password" type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
-      mdbInput>
-    <label for="materialRegisterFormPassword">Password</label>
-    <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-      At least 8 characters and 1 digit
-    </small>
-  </div>
-
-  <!-- Confirm Password -->
-  <div class="md-form">
-    <input formControlName="confirmPassword" type="password" id="materialRegisterFormConfirmPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
-      mdbInput>
-    <label for="materialRegisterFormConfirmPassword">Confirm Password</label>
-  </div>
-
-  <!-- Phone number -->
-  <div class="form-row mb-4">
-    <div class="col col-lg-2">
+      <!-- Password -->
       <div class="md-form">
-        <input formControlName="phoneNumberLada" autocomplete="off"
-          type="text" class="form-control"
+        <input formControlName="password" type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
           mdbInput>
-        <label for="phoneNumberLada">Lada</label>
-      </div>
-    </div>
-    <div class="col">
-      <div class="md-form">
-        <input formControlName="phoneNumberCel" autocomplete="off"
-          type="text" class="form-control"
-          aria-describedby="mRegisterFormPhoneHelpBlock"
-          mdbInput>
-        <label for="phoneNumberCel">Phone number</label>
-        <small id="mRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-          Optional - for two step authentication
+        <label for="materialRegisterFormPassword">Password</label>
+        <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+          Por lo menos 8 caracteres y 1 digito
         </small>
       </div>
-    </div>
+
+      <!-- Confirm Password -->
+      <div class="md-form">
+        <input formControlName="confirmPassword" type="password" id="materialRegisterFormConfirmPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+          mdbInput>
+        <label for="materialRegisterFormConfirmPassword">Confirmar Password</label>
+      </div>
+
+      <!-- Sign up button -->
+      <button mdbBtn color="info" block="true" class="my-4" type="submit">Crear cuenta</button>
+
+      <!-- Social register -->
+      <p>o cree cuenta con:</p>
+
+      <a type="button" class="light-blue-text mx-2">
+        <mdb-icon fab icon="facebook"></mdb-icon>
+      </a>
+
+      <hr>
+
+      <!-- Terms of service -->
+      <p>Al hacer click
+        <em>crear cuenta</em> usted acepta nuestro
+        <a [routerLink]="['home']" target="_blank">terminos de servicio</a>. </p>
+
+    </form>
+    <!-- Default form register -->
   </div>
-
-  <!-- Newsletter -->
-  <div class="row">
-    <div class="col-md-6 mx-auto d-flex justify-content-center">
-      <mdb-checkbox formControlName="isSuscribedToNewsletter">Subscribe to our newsletter</mdb-checkbox>
-    </div>
-  </div>
-
-  <!-- Sign up button -->
-  <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
-
-  <!-- Social register -->
-  <p>or sign up with:</p>
-
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="facebook"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="twitter"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="linkedin"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="heart"></mdb-icon>
-  </a>
-
-  <hr>
-
-  <!-- Terms of service -->
-  <p>By clicking
-    <em>Sign up</em> you agree to our
-    <a href="" target="_blank">terms of service</a> and
-    <a href="" target="_blank">terms of service</a>. </p>
-
-</form>
-<!-- Default form register -->
+  <div class="mt-5"></div>
+</div>

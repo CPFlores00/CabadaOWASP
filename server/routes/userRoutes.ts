@@ -105,16 +105,12 @@ class UserRoutes {
 			firstName,
 			lastName,
 			email,
-			password,
-			phoneNumber,
-			isSuscribedToNewsletter } = req.body;
+			password } = req.body;
 		const user = new User({
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
-			password: password,
-			phoneNumber: phoneNumber,
-			isSuscribedToNewsletter: isSuscribedToNewsletter
+			password: password
     });
 		await user.validate((err) => {
 			if (err) {

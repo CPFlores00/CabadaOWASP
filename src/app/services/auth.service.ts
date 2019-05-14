@@ -25,14 +25,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signUp(firstName: string, lastName: string, email: string, password: string, phoneNumber: string, isSuscribedToNewsletter: boolean) {
+  signUp(firstName: string, lastName: string, email: string, password: string) {
     return this.http.post<User>('http://localhost:3000/api/user', {
       firstName,
       lastName,
       email,
-      password,
-      phoneNumber,
-      isSuscribedToNewsletter
+      password
     })
       .pipe(
         shareReplay(),

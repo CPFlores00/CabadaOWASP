@@ -26,14 +26,6 @@ const UserSchema = new Schema({
     minlength: 8,
     required: true
   },
-  phoneNumber: {
-    type: String,
-    minlength: 10,
-    maxlength: 15
-  },
-  isSuscribedToNewsletter: {
-    type: Boolean
-  },
   isActive: {
     type: Boolean,
     default: false

@@ -44,25 +44,7 @@ export class SignupComponent implements OnInit {
       ]],
       confirmPassword: ['', [
         Validators.required
-      ]],
-      phoneNumberLada: new FormControl({
-        value: '+ 52',
-        disabled: true
-      }, [
-        Validators.minLength(2),
-        Validators.maxLength(3)
-      ]),
-      phoneNumberCel: new FormControl({
-        value: '(644)2444668',
-        disabled: true
-      }, [
-        Validators.minLength(10),
-        Validators.maxLength(12)
-      ]),
-      isSuscribedToNewsletter: new FormControl({
-        value: false,
-        disabled: true
-      }, [])
+      ]]
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -70,13 +52,9 @@ export class SignupComponent implements OnInit {
 
   signUp() {
     const val = this.registerForm.value;
-    const phoneNumber = val.phoneNumberLada + val.phoneNumberCel;
-    if (val.isSuscribedToNewsletter === '') {
-      val.isSuscribedToNewsletter = false;
-    }
 
     if (this.registerForm.valid) {
-      this.authService.signUp(val.firstName, val.lastName, val.email, val.password, phoneNumber, val.isSuscribedToNewsletter)
+      this.authService.signUp(val.firstName, val.lastName, val.email, val.password)
         .subscribe(
           () => this.router.navigate(['/home']),
           console.error
