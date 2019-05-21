@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { Types } from 'mongoose';
-import User from '../models/user';
+
+import UserS from '../models/user';
+import { randomBytes } from '../security/utils';
+import { sessionStorage } from 'server/security/session-storage';
+import { User } from 'src/app/model/user';
 
 
 class UserRoutes {
@@ -12,7 +16,7 @@ class UserRoutes {
 	}
 
 	private async getUsers(req: Request, res: Response, next: NextFunction): Promise<void> {
-    await User.find({})
+    await UserS.find({})
       .then((users) => {
         if (users) {
           res.status(201).json(users);
@@ -34,10 +38,20 @@ class UserRoutes {
       });
 	}
 
+  private getUserBySession(req: Request, res: Response) {
+    const sessionId = req.cookies["SESSIONID"];
+    const user = sessionStorage.findUserBySessionId(sessionId);
+    if (user)  {
+      res.status(200).json(user);
+    } else {
+      res.sendStatus(204)
+    }
+  }
+
 	private async getUserById(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { id } = req.params;
     if (Types.ObjectId.isValid(id)) {
-      await User.findById(id)
+      await UserS.findById(id)
         .then((user) => {
           if (user) {
             res.status(201).json(user);
@@ -70,7 +84,7 @@ class UserRoutes {
     const { email } = req.params;
     const e = new String(email);
     if (e instanceof String) {
-      await User.findOne({email: e})
+      await UserS.findOne({email: e})
         .then((user) => {
           if (user) {
             res.status(201).json(user);
@@ -105,8 +119,9 @@ class UserRoutes {
 			firstName,
 			lastName,
 			email,
-			password } = req.body;
-		const user = new User({
+      password } = req.body;
+
+		const user = new UserS({
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
@@ -127,6 +142,11 @@ class UserRoutes {
       await user.save()
         .then((user) => {
           if (user) {
+            const sessionId = randomBytes(32).then(bytes => bytes.toString('hex'));
+            const _id = user.id;
+            const user1: User = {_id: _id, email: email};
+            sessionStorage.createSession(sessionId, user1);
+            res.cookie("SESSIONID", sessionId, {httpOnly: true});
             res.status(201).json(user);
             return next();
           } else {
@@ -156,7 +176,7 @@ class UserRoutes {
 	private async deleteUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { id } = req.params;
     if (Types.ObjectId.isValid(id)) {
-      await User.findByIdAndDelete(id)
+      await UserS.findByIdAndDelete(id)
         .then((user) => {
           if (user) {
             //
@@ -185,7 +205,7 @@ class UserRoutes {
 	private async putUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { id } = req.params;
     if (Types.ObjectId.isValid(id)) {
-      await User.findOneAndUpdate({_id: id}, {$set: ''}, {new: true})
+      await UserS.findOneAndUpdate({_id: id}, {$set: ''}, {new: true})
         .then((user) => {
           if (user) {
             //
@@ -211,16 +231,35 @@ class UserRoutes {
     }
 	}
 
+  private login(req: Request, res: Response) {
+    const sessionId = req.cookies['SESSIONID'];
+    res.clearCookie('SESSIONID');
+    res.sendStatus(200);
+  }
+
+  private logout(req: Request, res: Response) {
+    const sessionId = req.cookies['SESSIONID'];
+    sessionStorage.destroySession(sessionId);
+    res.clearCookie('SESSIONID');
+    res.sendStatus(200);
+  }
+
 	private routes() {
     this._router.route('/api/user')
 			.get(this.getUsers)
-			.post(this.postUser);
+      .post(this.postUser);
+    this._router.route('/api/user/session')
+      .get(this.getUserBySession);
 		this._router.route('/api/user/:id')
       .get(this.getUserById)
 			.delete(this.deleteUser)
       .put(this.putUser);
     this._router.route('/api/user/getby/:email')
       .get(this.getUserByEmail);
+    this._router.route('/api/user/login')
+      .post(this.login);
+    this._router.route('/api/user/logout')
+      .post(this.logout);
 	}
 
 	get router(): Router {

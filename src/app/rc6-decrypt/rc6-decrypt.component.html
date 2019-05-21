@@ -1,0 +1,32 @@
+<div class="container-fluid mt-5">
+  <form class="text-center ">
+    <h1 class="mb-4">Desencriptar</h1>
+
+    <div class="form-row align-items-center">
+      <!-- Grid column -->
+      <div class="col-auto">
+        <!-- Material background input -->
+        <div class="md-form md-bg">
+          <input type="text" id="formBg1" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
+          <label for="formBg1">Llave</label>
+          <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+            La llave debe de ser 16 caracteres
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!--Material textarea-->
+    <div class="md-form md-outline">
+      <textarea type="text" id="form75" class="form-control md-textarea" rows="3" mdbInput></textarea>
+      <label for="form75">Texto a desencriptar</label>
+    </div>
+
+    <button mdbBtn color="elegant-color-dark" block="true" class="btn btn-primary btn-md" type="submit">Desencriptar</button>
+
+    <h2>El resultado es: </h2>
+    <h5>{{ result }}</h5>
+  </form>
+</div>
+<div class="mt-5"></div>
+  

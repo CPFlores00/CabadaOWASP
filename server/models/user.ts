@@ -23,7 +23,6 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    minlength: 8,
     required: true
   },
   isActive: {
@@ -50,4 +49,4 @@ const UserSchema = new Schema({
   }
 });
 
-export default model('User', UserSchema);
+export default model('UserS', UserSchema);

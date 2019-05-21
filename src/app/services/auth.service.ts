@@ -26,7 +26,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signUp(firstName: string, lastName: string, email: string, password: string) {
-    return this.http.post<User>('http://localhost:3000/api/user', {
+    return this.http.post<User>('http://api-seginfo.ddns.net:3000/api/user', {
       firstName,
       lastName,
       email,
@@ -37,5 +37,7 @@ export class AuthService {
         tap(user => this.subject.next(user))
       );
   }
+
+  logIn() {}
 
 }

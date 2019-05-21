@@ -12,6 +12,7 @@ import * as mongoose from 'mongoose';
 import * as helmet from 'helmet';
 import * as compression from 'compression';
 import * as userRoutes from './routes/userRoutes';
+import * as rc6Routes from './routes/rc6Routes';
 
 class Server {
 
@@ -116,14 +117,21 @@ class Server {
   }
 
   private routes() {
-    const router: Router = userRoutes.default.router;
+    const userRouter: Router = userRoutes.default.router;
+    const rc6Router: Router = rc6Routes.default.router;
     
-    router.use((req: Request, res: Response, next: NextFunction) => {
+    userRouter.use((req: Request, res: Response, next: NextFunction) => {
       console.log('%s %s %s', req.method, req.url, req.path);
       next();
     });
 
-    this.app.use(router);
+    rc6Router.use((req: Request, res: Response, next: NextFunction) => {
+      console.log('%s %s %s', req.method, req.url, req.path);
+      next();
+    });
+
+    this.app.use(userRouter);
+    this.app.use(rc6Router);
   }
 
   public start() {
